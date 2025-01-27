@@ -1,38 +1,46 @@
-class listing
-    attr_accessor :username, :title,:description, :id
+require 'active_record'
+require_relative '../config/db_config'
 
-    @@listings = []
-
-    def initialize(username, title,description, id)
-        @username = username
-        @title = title
-        @description = description
-        @id = id
-
-        @@listings << self
-    end
-
-    def self.all()
-        @@listings
-    end
-
-    def self.find(id)
-        @@listings.find { |listing| listing.id ==id}
-        #TODO: implements better search query logic
-    end
-
-    def self.delete(id)
-        listing = find(id)
-        @@listings.delete(listing) if listing
-    end
-
-    def self.update(id, title, description)
-        listing = find(id)
-        listing.title = title
-        listing.description = description
-    end
-
+class Listing < ActiveRecord::Base
+    validates :title, :description, presence: true
 end
+    
+ #   attr_accessor :username, :title,:description, :id
+#
+  #  @@listings = []
+ #   @@current_id = 0
+#
+    #def initialize(username, title,description)
+     #   @username = username
+    #    @title = title
+   #     @description = description
+  #      @id = @@current_id
+ #       @@current_id += 1
+#
+  #      @@listings << self
+ #   end
+#
+   # def self.all()
+  #      @@listings
+ #   end
+#
+    #def self.find(id)
+   #     @@listings.find { |listing| listing.id ==id}
+  #      #TODO: implements better search query logic
+ #   end
+#
+    #def self.delete(id)
+   #     listing = self.find(id)
+  #      @@listings.delete(listing)
+ #   end
+#
+  #  def self.update(id, title, description)
+ #       listing = self.find(id)
+#
+#        listing.title = title
+#        listing.description = description
+#    end
+#end
 
 
 # Improvement 1: Ensure ID uniqueness

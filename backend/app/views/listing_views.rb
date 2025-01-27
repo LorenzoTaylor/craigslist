@@ -1,4 +1,5 @@
 class ListingViews
+    require 'json'
 
     def display_all_listings(listings)
         if listings.empty?
@@ -20,19 +21,18 @@ class ListingViews
         title = gets.chomp
         
         print "Enter Description: "
-        description = get.chomp
+        description = gets.chomp
 
         { title: title, description: description}
     end
 
     def get_listing_id(action)
-        print "Enter Listing ID: to #{action}"
+        print "Enter Listing ID: to #{action} "
         gets.chomp.to_i
     end
 
     def display_listing_created(listing)
-        puts JSON.generate
-        ({ 
+        puts JSON.generate({ 
             message: "Listing successfully created", 
             listing: {
                 id: listing.id,
@@ -43,8 +43,7 @@ class ListingViews
     end
     
     def display_listing_updated(listing)
-        puts JSON.generate
-        ({ 
+        puts JSON.generate({ 
             message: "listing successfully updated",
             listing: {
                 id: listing.id,
